@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Подбор ЖК — три комплекса под ваш бюджет</title>
+<meta name="description" content="Три жилых комплекса бизнес- и премиум-класса под ваш бюджет и площадь — в Москве, Сочи или Новосибирске. Данные на 11.11.2026, у каждой цифры есть источник.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='5' y='5' width='22' height='22' fill='none' stroke='%232D5A47' stroke-width='3'/%3E%3Cpath d='M16 5v22M5 18h11' stroke='%232D5A47' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- шрифты не блокируют отрисовку: сначала текст запасным шрифтом с подогнанными метриками -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Onest:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Onest:wght@400;500;600&display=swap"></noscript>
+<script>try { const t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch {}</script>
+<link rel="stylesheet" href="style.css">
+<link rel="modulepreload" href="pick.js">
+<link rel="preload" href="data.json" as="fetch" crossorigin>
+</head>
+<body>
+<div class="sheet">
+  <header class="stamp-top">
+    <span class="caps">Подбор ЖК</span>
+    <span class="caps muted hide-sm">Бизнес и премиум · три города</span>
+    <span class="top-right">
+      <span class="caps">Данные на <time id="date" datetime="2026-11-11">11.11.2026</time></span>
+      <button class="theme caps" id="theme" type="button"><svg viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="4.8" fill="none"/><path d="M6 1.2a4.8 4.8 0 0 0 0 9.6z"/></svg><span>Тёмная тема</span></button>
+    </span>
+  </header>
+
+  <main>
+    <section class="intro" aria-labelledby="title">
+      <div class="intro-main">
+        <h1 id="title"><span>Три жилых комплекса под&nbsp;ваш бюджет&nbsp;—</span> <em>в&nbsp;Москве, Сочи или Новосибирске</em></h1>
+        <p class="lead">Выберите город, задайте бюджет и площадь — оценка стоимости пересчитывается сразу. У каждой цифры есть ссылка на источник.</p>
+      </div>
+      <figure class="facade" aria-hidden="true">
+        <svg viewBox="20 20 400 386" focusable="false"><line class="fa-axis" x1="120" y1="36" x2="120" y2="382"/><circle class="fa-bub" cx="120" cy="392" r="9"/><text class="fa-t" x="120" y="395.5" text-anchor="middle">1</text><line class="fa-axis" x1="155" y1="36" x2="155" y2="382"/><circle class="fa-bub" cx="155" cy="392" r="9"/><text class="fa-t" x="155" y="395.5" text-anchor="middle">2</text><line class="fa-axis" x1="190" y1="36" x2="190" y2="382"/><circle class="fa-bub" cx="190" cy="392" r="9"/><text class="fa-t" x="190" y="395.5" text-anchor="middle">3</text><line class="fa-axis" x1="225" y1="36" x2="225" y2="382"/><circle class="fa-bub" cx="225" cy="392" r="9"/><text class="fa-t" x="225" y="395.5" text-anchor="middle">4</text><line class="fa-axis" x1="260" y1="36" x2="260" y2="382"/><circle class="fa-bub" cx="260" cy="392" r="9"/><text class="fa-t" x="260" y="395.5" text-anchor="middle">5</text><line class="fa-axis" x1="295" y1="36" x2="295" y2="382"/><circle class="fa-bub" cx="295" cy="392" r="9"/><text class="fa-t" x="295" y="395.5" text-anchor="middle">6</text><line class="fa-axis" x1="330" y1="36" x2="330" y2="382"/><circle class="fa-bub" cx="330" cy="392" r="9"/><text class="fa-t" x="330" y="395.5" text-anchor="middle">7</text><line class="fa-axis" x1="390" y1="36" x2="390" y2="382"/><circle class="fa-bub" cx="390" cy="392" r="9"/><text class="fa-t" x="390" y="395.5" text-anchor="middle">8</text><path class="fa-wall" d="M120,360V50H330V360Z"/><path class="fa-wall" d="M330,360V198H390V360"/><line class="fa-thin" x1="120" y1="66" x2="330" y2="66"/><line class="fa-floor" x1="120" y1="308" x2="330" y2="308"/><line class="fa-floor" x1="120" y1="286" x2="330" y2="286"/><line class="fa-floor" x1="120" y1="264" x2="330" y2="264"/><line class="fa-floor" x1="120" y1="242" x2="330" y2="242"/><line class="fa-floor" x1="120" y1="220" x2="330" y2="220"/><line class="fa-floor" x1="120" y1="198" x2="330" y2="198"/><line class="fa-floor" x1="120" y1="176" x2="330" y2="176"/><line class="fa-floor" x1="120" y1="154" x2="330" y2="154"/><line class="fa-floor" x1="120" y1="132" x2="330" y2="132"/><line class="fa-floor" x1="120" y1="110" x2="330" y2="110"/><line class="fa-floor" x1="120" y1="88" x2="330" y2="88"/><line class="fa-floor" x1="120" y1="66" x2="330" y2="66"/><line class="fa-floor" x1="330" y1="308" x2="390" y2="308"/><line class="fa-floor" x1="330" y1="286" x2="390" y2="286"/><line class="fa-floor" x1="330" y1="264" x2="390" y2="264"/><line class="fa-floor" x1="330" y1="242" x2="390" y2="242"/><line class="fa-floor" x1="330" y1="220" x2="390" y2="220"/><line class="fa-floor" x1="330" y1="198" x2="390" y2="198"/><rect class="fa-win" x="127" y="313" width="21" height="13"/><rect class="fa-win" x="162" y="313" width="21" height="13"/><rect class="fa-win" x="197" y="313" width="21" height="13"/><rect class="fa-win" x="232" y="313" width="21" height="13"/><rect class="fa-win" x="267" y="313" width="21" height="13"/><rect class="fa-win" x="302" y="313" width="21" height="13"/><rect class="fa-win" x="127" y="291" width="21" height="13"/><rect class="fa-win" x="162" y="291" width="21" height="13"/><rect class="fa-win" x="197" y="291" width="21" height="13"/><rect class="fa-win" x="232" y="291" width="21" height="13"/><rect class="fa-win" x="267" y="291" width="21" height="13"/><rect class="fa-win" x="302" y="291" width="21" height="13"/><rect class="fa-win" x="127" y="269" width="21" height="13"/><rect class="fa-win" x="162" y="269" width="21" height="13"/><rect class="fa-win" x="197" y="269" width="21" height="13"/><rect class="fa-win" x="232" y="269" width="21" height="13"/><rect class="fa-win" x="267" y="269" width="21" height="13"/><rect class="fa-win" x="302" y="269" width="21" height="13"/><rect class="fa-win" x="127" y="247" width="21" height="13"/><rect class="fa-win" x="162" y="247" width="21" height="13"/><rect class="fa-win" x="197" y="247" width="21" height="13"/><rect class="fa-win" x="232" y="247" width="21" height="13"/><rect class="fa-win" x="267" y="247" width="21" height="13"/><rect class="fa-win" x="302" y="247" width="21" height="13"/><rect class="fa-win" x="127" y="225" width="21" height="13"/><rect class="fa-win" x="162" y="225" width="21" height="13"/><rect class="fa-win" x="197" y="225" width="21" height="13"/><rect class="fa-win" x="232" y="225" width="21" height="13"/><rect class="fa-win" x="267" y="225" width="21" height="13"/><rect class="fa-win" x="302" y="225" width="21" height="13"/><rect class="fa-win" x="127" y="203" width="21" height="13"/><rect class="fa-win" x="162" y="203" width="21" height="13"/><rect class="fa-win" x="197" y="203" width="21" height="13"/><rect class="fa-win" x="232" y="203" width="21" height="13"/><rect class="fa-win" x="267" y="203" width="21" height="13"/><rect class="fa-win" x="302" y="203" width="21" height="13"/><rect class="fa-win" x="127" y="181" width="21" height="13"/><rect class="fa-win" x="162" y="181" width="21" height="13"/><rect class="fa-win" x="197" y="181" width="21" height="13"/><rect class="fa-win" x="232" y="181" width="21" height="13"/><rect class="fa-win" x="267" y="181" width="21" height="13"/><rect class="fa-win" x="302" y="181" width="21" height="13"/><rect class="fa-win" x="127" y="159" width="21" height="13"/><rect class="fa-win" x="162" y="159" width="21" height="13"/><rect class="fa-win" x="197" y="159" width="21" height="13"/><rect class="fa-win" x="232" y="159" width="21" height="13"/><rect class="fa-win" x="267" y="159" width="21" height="13"/><rect class="fa-win" x="302" y="159" width="21" height="13"/><rect class="fa-win" x="127" y="137" width="21" height="13"/><rect class="fa-win" x="162" y="137" width="21" height="13"/><rect class="fa-win" x="197" y="137" width="21" height="13"/><rect class="fa-win on" x="232" y="137" width="21" height="13"/><rect class="fa-win on" x="267" y="137" width="21" height="13"/><rect class="fa-win" x="302" y="137" width="21" height="13"/><rect class="fa-win" x="127" y="115" width="21" height="13"/><rect class="fa-win" x="162" y="115" width="21" height="13"/><rect class="fa-win" x="197" y="115" width="21" height="13"/><rect class="fa-win" x="232" y="115" width="21" height="13"/><rect class="fa-win" x="267" y="115" width="21" height="13"/><rect class="fa-win" x="302" y="115" width="21" height="13"/><rect class="fa-win" x="127" y="93" width="21" height="13"/><rect class="fa-win" x="162" y="93" width="21" height="13"/><rect class="fa-win" x="197" y="93" width="21" height="13"/><rect class="fa-win" x="232" y="93" width="21" height="13"/><rect class="fa-win" x="267" y="93" width="21" height="13"/><rect class="fa-win" x="302" y="93" width="21" height="13"/><rect class="fa-win" x="127" y="71" width="21" height="13"/><rect class="fa-win" x="162" y="71" width="21" height="13"/><rect class="fa-win" x="197" y="71" width="21" height="13"/><rect class="fa-win" x="232" y="71" width="21" height="13"/><rect class="fa-win" x="267" y="71" width="21" height="13"/><rect class="fa-win" x="302" y="71" width="21" height="13"/><rect class="fa-win" x="336" y="313" width="18" height="13"/><rect class="fa-win" x="366" y="313" width="18" height="13"/><rect class="fa-win" x="336" y="291" width="18" height="13"/><rect class="fa-win" x="366" y="291" width="18" height="13"/><rect class="fa-win" x="336" y="269" width="18" height="13"/><rect class="fa-win" x="366" y="269" width="18" height="13"/><rect class="fa-win" x="336" y="247" width="18" height="13"/><rect class="fa-win" x="366" y="247" width="18" height="13"/><rect class="fa-win" x="336" y="225" width="18" height="13"/><rect class="fa-win" x="366" y="225" width="18" height="13"/><rect class="fa-win" x="336" y="203" width="18" height="13"/><rect class="fa-win" x="366" y="203" width="18" height="13"/><rect class="fa-unit" x="225" y="132" width="70" height="22"/><path class="fa-thin" d="M199,360V338H251V360M225,360V338M191,336H259"/><rect class="fa-win" x="132" y="338" width="18" height="16"/><rect class="fa-win" x="160" y="338" width="18" height="16"/><rect class="fa-win" x="290" y="338" width="18" height="16"/><line class="fa-ground" x1="40" y1="360" x2="410" y2="360"/><line class="fa-hatch" x1="44" y1="361" x2="38" y2="367"/><line class="fa-hatch" x1="53" y1="361" x2="47" y2="367"/><line class="fa-hatch" x1="62" y1="361" x2="56" y2="367"/><line class="fa-hatch" x1="71" y1="361" x2="65" y2="367"/><line class="fa-hatch" x1="80" y1="361" x2="74" y2="367"/><line class="fa-hatch" x1="89" y1="361" x2="83" y2="367"/><line class="fa-hatch" x1="98" y1="361" x2="92" y2="367"/><line class="fa-hatch" x1="107" y1="361" x2="101" y2="367"/><line class="fa-hatch" x1="116" y1="361" x2="110" y2="367"/><line class="fa-hatch" x1="125" y1="361" x2="119" y2="367"/><line class="fa-hatch" x1="134" y1="361" x2="128" y2="367"/><line class="fa-hatch" x1="143" y1="361" x2="137" y2="367"/><line class="fa-hatch" x1="152" y1="361" x2="146" y2="367"/><line class="fa-hatch" x1="161" y1="361" x2="155" y2="367"/><line class="fa-hatch" x1="170" y1="361" x2="164" y2="367"/><line class="fa-hatch" x1="179" y1="361" x2="173" y2="367"/><line class="fa-hatch" x1="188" y1="361" x2="182" y2="367"/><line class="fa-hatch" x1="197" y1="361" x2="191" y2="367"/><line class="fa-hatch" x1="206" y1="361" x2="200" y2="367"/><line class="fa-hatch" x1="215" y1="361" x2="209" y2="367"/><line class="fa-hatch" x1="224" y1="361" x2="218" y2="367"/><line class="fa-hatch" x1="233" y1="361" x2="227" y2="367"/><line class="fa-hatch" x1="242" y1="361" x2="236" y2="367"/><line class="fa-hatch" x1="251" y1="361" x2="245" y2="367"/><line class="fa-hatch" x1="260" y1="361" x2="254" y2="367"/><line class="fa-hatch" x1="269" y1="361" x2="263" y2="367"/><line class="fa-hatch" x1="278" y1="361" x2="272" y2="367"/><line class="fa-hatch" x1="287" y1="361" x2="281" y2="367"/><line class="fa-hatch" x1="296" y1="361" x2="290" y2="367"/><line class="fa-hatch" x1="305" y1="361" x2="299" y2="367"/><line class="fa-hatch" x1="314" y1="361" x2="308" y2="367"/><line class="fa-hatch" x1="323" y1="361" x2="317" y2="367"/><line class="fa-hatch" x1="332" y1="361" x2="326" y2="367"/><line class="fa-hatch" x1="341" y1="361" x2="335" y2="367"/><line class="fa-hatch" x1="350" y1="361" x2="344" y2="367"/><line class="fa-hatch" x1="359" y1="361" x2="353" y2="367"/><line class="fa-hatch" x1="368" y1="361" x2="362" y2="367"/><line class="fa-hatch" x1="377" y1="361" x2="371" y2="367"/><line class="fa-hatch" x1="386" y1="361" x2="380" y2="367"/><line class="fa-hatch" x1="395" y1="361" x2="389" y2="367"/><line class="fa-hatch" x1="404" y1="361" x2="398" y2="367"/><line class="fa-lev" x1="54" y1="360" x2="114" y2="360"/><path class="fa-mk" d="M62,360l-5,-6h10z"/><text class="fa-t" x="70" y="356">±0,000</text><line class="fa-lev" x1="54" y1="330" x2="114" y2="330"/><path class="fa-mk" d="M62,330l-5,-6h10z"/><text class="fa-t" x="70" y="326">+4,500</text><line class="fa-lev" x1="54" y1="198" x2="114" y2="198"/><path class="fa-mk" d="M62,198l-5,-6h10z"/><text class="fa-t" x="70" y="194">+22,500</text><line class="fa-lev" x1="54" y1="66" x2="114" y2="66"/><path class="fa-mk" d="M62,66l-5,-6h10z"/><text class="fa-t" x="70" y="62">+40,500</text><line class="fa-lev" x1="54" y1="50" x2="114" y2="50"/><path class="fa-mk" d="M62,50l-5,-6h10z"/><text class="fa-t" x="70" y="46">+42,000</text><path class="fa-lead" d="M295,143.0L376,99.0H410"/><circle class="fa-dot" cx="295" cy="143.0" r="2.5"/><text class="fa-call" x="410" y="93.0" text-anchor="end">Квартира <tspan id="facade-area">40</tspan> м²</text></svg>
+        <figcaption class="caps muted">Фасад в осях 1–8</figcaption>
+      </figure>
+    </section>
+
+    <fieldset class="cities">
+      <legend class="caps">Город</legend>
+      <div class="cities-row" id="cities"></div>
+      <svg class="skyline" viewBox="0 0 1200 120" preserveAspectRatio="xMidYMax meet" aria-hidden="true" focusable="false">
+        <path data-city="Москва" pathLength="1" d="M0,112H40V100H70V92H96V112H130V80H134V66H137V56L145,30L153,56V66H156V80H160V112H190V94H196C196,86 204,84 206,74C208,84 216,86 216,94H222V86C222,76 232,73 235,60C238,73 248,76 248,86V94H262V112H300V98H340V104H380V112H440V90H470V76H490V62H500V48H506V36H510V24L512,8L514,24H518V36H524V48H534V62H554V76H584V90V112H640V100H680V112H820V64H842V40L848,34H862V52H872V20L880,12L888,20V60H900V30H916V44H930V70H944V50L958,46V80H980V112H1020V96H1060V104H1100V112H1200"/>
+        <path data-city="Сочи" pathLength="1" d="M0,96L70,70L110,82L170,48L215,72L250,64L300,88L330,96H340V84H366V96H380V78H404V96H430V88H448V76H462V60H466V44L470,18L474,44V60H478V76H492V88H510V96H540V70H570V96H590V80H618V96H700L740,104H1200M652,96Q648,80 654,62M654,62Q640,58 632,66M654,62Q666,56 676,64M654,62Q648,52 640,50M654,62Q662,50 670,50M800,112q10,-4 20,0t20,0M960,111q10,-4 20,0t20,0t20,0M1100,113q8,-3 16,0t16,0"/>
+        <path data-city="Новосибирск" pathLength="1" d="M0,112H50V98H80V90H110V112H140V80H170V70H190V112H300V92H320V84H340V76H360V64A60,40 0 0 1 480,64V76H500V84H520V92H540V112H600V78H630V112H700V96H1160V112H1200M416,25V16L420,8L424,16V25M760,96Q850,40 940,96M940,96Q1030,52 1120,96M790,80.4V96M820,71.1V96M850,68V96M880,71.1V96M910,80.4V96M760,96V112M940,96V112M1120,96V112M780,108q8,-3 16,0t16,0M1000,109q8,-3 16,0t16,0"/>
+      </svg>
+    </fieldset>
+
+    <section class="controls" aria-label="Параметры квартиры">
+      <div class="inputs">
+        <div class="field" id="f-budget">
+          <div class="field-head">
+            <label class="caps" for="budget-num">Бюджет</label>
+            <output class="big" id="budget-out" for="budget-num budget-range">25 <span class="u">млн ₽</span></output>
+          </div>
+          <input type="range" id="budget-range" min="0" max="300" step="1" value="140" aria-label="Бюджет, шкала" aria-describedby="budget-hint">
+          <div class="ticks" aria-hidden="true"><span style="--p:0">1</span><span style="--p:.3333">10</span><span style="--p:.6667">100</span><span style="--p:1">1&nbsp;000</span></div>
+          <div class="num">
+            <input type="text" inputmode="decimal" id="budget-num" value="25" autocomplete="off" aria-describedby="budget-hint">
+            <span class="unit">млн ₽</span>
+          </div>
+          <p class="hint" id="budget-hint">От 1 до 1 000 млн ₽, например 25 или 12,5</p>
+        </div>
+
+        <div class="field" id="f-area">
+          <div class="field-head">
+            <label class="caps" for="area-num">Площадь</label>
+            <output class="big" id="area-out" for="area-num area-range">40 <span class="u">м<span class="sq">2</span></span></output>
+          </div>
+          <input type="range" id="area-range" min="15" max="300" step="1" value="40" aria-label="Площадь, шкала" aria-describedby="area-hint">
+          <div class="ticks" aria-hidden="true"><span style="--p:0">15</span><span style="--p:.1228">50</span><span style="--p:.2982">100</span><span style="--p:.6491">200</span><span style="--p:1">300</span></div>
+          <div class="num">
+            <input type="text" inputmode="decimal" id="area-num" value="40" autocomplete="off" aria-describedby="area-hint">
+            <span class="unit">м²</span>
+          </div>
+          <p class="hint" id="area-hint">От 15 до 300 м²</p>
+        </div>
+      </div>
+
+      <figure class="plan">
+        <svg id="plan" viewBox="0 0 520 372" role="img" aria-labelledby="plan-cap plan-desc">
+          <desc id="plan-desc">План квартиры заданной площади в масштабе</desc>
+          <defs>
+            <pattern id="grid" width="18" height="18" patternUnits="userSpaceOnUse" x="60" y="64">
+              <path d="M18 0H0V18" fill="none" class="grid-line"/>
+            </pattern>
+          </defs>
+          <rect x="24" y="28" width="468" height="306" fill="url(#grid)"/>
+          <g id="plan-draw"></g>
+        </svg>
+        <figcaption id="plan-cap" class="caps muted">Схема в масштабе · клетка 1 × 1 м</figcaption>
+      </figure>
+    </section>
+
+    <section class="results" aria-labelledby="res-title">
+      <div class="res-head">
+        <h2 id="res-title" class="caps">Подходящие ЖК</h2>
+        <p class="res-sum" id="res-sum"></p>
+      </div>
+      <ol class="cards" id="cards"></ol>
+      <p class="sr-only" id="live" aria-live="polite" aria-atomic="true"></p>
+    </section>
+  </main>
+
+  <footer class="stamp">
+    <div><h3 class="caps">Как считаем</h3><p>Оценка = площадь × «цена от». «Цена от» — самый дешёвый лот за м² в продаже, а не средняя по комплексу. Поэтому стоимость — нижняя оценка, округлена до 10&nbsp;000 ₽.</p></div>
+    <div><h3 class="caps">Данные</h3><p>15 ЖК бизнес- и премиум-класса, по 5 в каждом городе. Сняты <span id="date2">11.11.2026</span>. У каждой карточки — ссылки на источник и сверку и пометка, насколько цифры подтверждены.</p></div>
+    <div><h3 class="caps">Надёжность</h3>
+      <ul class="legend">
+        <li><span class="ver ver-ok"><svg viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="5"/></svg>Сверено с застройщиком</span></li>
+        <li><span class="ver ver-partial"><svg viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="4.5" fill="none"/><path d="M6 1.5a4.5 4.5 0 0 0 0 9z"/></svg>Сверено со вторым агрегатором</span></li>
+        <li><span class="ver ver-warn"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M6 1 11.5 11H.5z"/></svg>Есть расхождение</span></li>
+      </ul>
+    </div>
+    <div><h3 class="caps">Важно</h3><p>Не является публичной офертой. Сервис не связан с застройщиками и агрегаторами — цены и наличие уточняйте по ссылкам. Введённые данные не покидают браузер.</p></div>
+  </footer>
+</div>
+<script type="module" src="app.js"></script>
+</body>
+</html>

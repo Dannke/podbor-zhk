@@ -1,0 +1,6 @@
+// Cloudflare Workers со статикой: отдаём web/public как есть, без серверного кода и логов.
+{
+  "name": "podbor-zhk",
+  "compatibility_date": "2026-11-10",
+  "assets": { "directory": "./public" }
+}

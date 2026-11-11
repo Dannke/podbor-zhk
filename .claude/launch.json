@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "podbor-zhk",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-c", "import mimetypes,functools,http.server as h; mimetypes.add_type('text/javascript','.js'); h.test(HandlerClass=functools.partial(h.SimpleHTTPRequestHandler, directory='web/public'), port=8765, bind='127.0.0.1')"],
+      "port": 8765
+    }
+  ]
+}
