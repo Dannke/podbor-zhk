@@ -247,10 +247,20 @@ function themeToggle() {
   const root = document.documentElement, btn = $('theme'), sys = matchMedia('(prefers-color-scheme: dark)');
   const dark = () => (root.dataset.theme ?? (sys.matches ? 'dark' : 'light')) === 'dark';
   const paint = () => { btn.lastElementChild.textContent = dark() ? 'Светлая тема' : 'Тёмная тема'; };
-  btn.addEventListener('click', () => {
+  const apply = () => {
     root.dataset.theme = dark() ? 'light' : 'dark';
     try { localStorage.setItem('theme', root.dataset.theme); } catch {}
     paint();
+  };
+  btn.addEventListener('click', () => {
+    if (!document.startViewTransition || reduced.matches) return apply();
+    // новая тема раскрывается кругом от кнопки (View Transitions; без поддержки — мгновенно)
+    const r = btn.getBoundingClientRect();
+    const x = r.left + r.width / 2, y = r.top + r.height / 2;
+    root.style.setProperty('--vt-x', `${x}px`);
+    root.style.setProperty('--vt-y', `${y}px`);
+    root.style.setProperty('--vt-r', `${Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y))}px`);
+    document.startViewTransition(apply);
   });
   sys.addEventListener('change', paint);
   paint();

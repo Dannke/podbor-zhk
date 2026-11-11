@@ -355,6 +355,13 @@ details p { margin-top: 6px; }
   input[type=range]:active::-webkit-slider-thumb { transform: rotate(45deg) scale(1.2); }
 }
 @keyframes fade { from { opacity: 0; } }
+/* смена темы: новая тема раскрывается кругом от кнопки */
+::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+::view-transition-new(root) { animation: theme-in .6s cubic-bezier(.45, 0, .25, 1); }
+@keyframes theme-in {
+  from { clip-path: circle(0 at var(--vt-x, 100%) var(--vt-y, 0)); }
+  to { clip-path: circle(var(--vt-r, 150vmax) at var(--vt-x, 100%) var(--vt-y, 0)); }
+}
 @keyframes build { from { clip-path: inset(100% 0 0 0); } }
 @keyframes lift { from { transform: translateY(.18em); } }
 @keyframes rise { from { opacity: 0; transform: translateY(.3em); } }
