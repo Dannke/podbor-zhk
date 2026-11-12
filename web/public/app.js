@@ -93,13 +93,16 @@ const host = (u) => {
   const parts = new URL(u).hostname.replace(/^www\./, '').split('.');
   return (parts.length > 2 && parts[0].length > 12 ? parts.slice(-2) : parts).join('.');
 };
-const priceHTML = (rub) => `<small>от</small> ${fmtMln(rub).replace(/ млн ₽$/, '')}<small>&nbsp;млн&nbsp;₽</small>`;
+// оценки «от» — всегда два знака, чтобы 9,80 стояло в одном формате с 21,96
+const num2 = new Intl.NumberFormat('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const mln2 = (rub) => `${num2.format(rub / 1e6)} млн ₽`;
+const priceHTML = (rub) => `<small>от</small> ${num2.format(rub / 1e6)}<small>&nbsp;млн&nbsp;₽</small>`;
 
 function overHTML(i) {
   const pct = i.overPct >= 1 ? `на ${i.overPct} %` : 'менее чем на 1 %';
   const fix = i.maxArea
-    ? `Добавьте к бюджету ${fmtMln(i.extra)} или уменьшите площадь до ${i.maxArea} м².`
-    : `Добавьте к бюджету ${fmtMln(i.extra)} — даже 15 м² здесь в бюджет не помещаются.`;
+    ? `Добавьте к бюджету ${mln2(i.extra)} или уменьшите площадь до ${i.maxArea} м².`
+    : `Добавьте к бюджету ${mln2(i.extra)} — даже 15 м² здесь в бюджет не помещаются.`;
   return `<strong>Выше бюджета ${pct}</strong>${fix}`;
 }
 
@@ -107,14 +110,14 @@ function cardHTML(i, n) {
   const [verText, verIcon] = VER[i.verification];
   return `<li class="card${i.over ? ' is-over' : ''}" style="--i:${n}">
     <div class="card-top">
-      <span class="rank caps">${i.over ? 'Сверх бюджета' : `Вариант ${n + 1}`}</span>
-      <span class="tag caps${i.class === 'премиум' ? ' premium' : ''}">${esc(i.class)}</span>
-      ${i.isApartments ? '<span class="tag apart caps">Апартаменты</span>' : ''}
+      <span class="rank label">${i.over ? 'Сверх бюджета' : `Вариант ${n + 1}`}</span>
+      <span class="tag label${i.class === 'премиум' ? ' premium' : ''}">${esc(i.class[0].toUpperCase() + i.class.slice(1))}</span>
+      ${i.isApartments ? '<span class="tag apart label">Апартаменты</span>' : ''}
     </div>
     <h3>${esc(i.name)}</h3>
     <p class="who">${esc(i.developer)} · ${esc(i.district)}</p>
     <div class="price">
-      <span class="caps">Стоимость ${num.format(state.area)}&nbsp;м²</span>
+      <span class="label">Стоимость ${num.format(state.area)}&nbsp;м²</span>
       <span class="price-v" data-v="${i.estimate}">${priceHTML(i.estimate)}</span>
     </div>
     ${i.over ? `<p class="over">${overHTML(i)}</p>` : ''}
@@ -146,7 +149,7 @@ function renderResults() {
     // те же ЖК — обновляем цифры на месте, раскрытые «Что сверено» не схлопываются
     cards.querySelectorAll('.card').forEach((c, n) => {
       const i = r.results[n];
-      c.querySelector('.price .caps').innerHTML = `Стоимость ${num.format(state.area)}&nbsp;м²`;
+      c.querySelector(".price .label").innerHTML = `Стоимость ${num.format(state.area)}&nbsp;м²`;
       if (i.over) c.querySelector('.over').innerHTML = overHTML(i);
       countPrice(n, Number(c.querySelector('.price-v').dataset.v), i.estimate);
     });
@@ -160,7 +163,7 @@ function renderResults() {
   clearTimeout(liveTimer);
   liveTimer = setTimeout(() => {
     $('live').textContent = `${$('res-sum').textContent.replace('м2', 'м²')}. ` +
-      r.results.map((i) => `${i.name}, от ${fmtMln(i.estimate)}${i.over ? `, выше бюджета на ${Math.max(1, i.overPct)} %` : ''}`).join('; ');
+      r.results.map((i) => `${i.name}, от ${mln2(i.estimate)}${i.over ? `, выше бюджета на ${Math.max(1, i.overPct)} %` : ''}`).join('; ');
   }, 600);
 }
 
@@ -275,7 +278,7 @@ function init(data) {
     const min = Math.min(...list.map((i) => i.pricePerM2));
     return `<label class="city"><input type="radio" name="city" value="${c}"${c === state.city ? ' checked' : ''}>
       <span class="city-name">${c}</span>
-      <span class="city-meta caps">${list.length} ЖК · от ${Math.round(min / 1000)} тыс. ₽/м²</span></label>`;
+      <span class="city-meta label">${list.length} ЖК · от ${Math.round(min / 1000)} тыс. ₽/м²</span></label>`;
   }).join('');
   $('cities').addEventListener('change', (e) => setCity(e.target.value));
 

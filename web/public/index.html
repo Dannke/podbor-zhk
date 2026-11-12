@@ -10,8 +10,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- шрифты не блокируют отрисовку: сначала текст запасным шрифтом с подогнанными метриками -->
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Onest:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Onest:wght@400;500;600&display=swap"></noscript>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Onest:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Onest:wght@400;500;600&display=swap"></noscript>
 <script>try { const t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch {}</script>
 <link rel="stylesheet" href="style.css">
 <link rel="modulepreload" href="pick.js">
@@ -24,7 +24,7 @@
     <span class="caps muted hide-sm">Бизнес и премиум · три города</span>
     <span class="top-right">
       <span class="caps">Данные на <time id="date" datetime="2026-11-11">11.11.2026</time></span>
-      <button class="theme caps" id="theme" type="button"><svg viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="4.8" fill="none"/><path d="M6 1.2a4.8 4.8 0 0 0 0 9.6z"/></svg><span>Тёмная тема</span></button>
+      <button class="theme label" id="theme" type="button"><svg viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="4.8" fill="none"/><path d="M6 1.2a4.8 4.8 0 0 0 0 9.6z"/></svg><span>Тёмная тема</span></button>
     </span>
   </header>
 
@@ -41,7 +41,7 @@
     </section>
 
     <fieldset class="cities">
-      <legend class="caps">Город</legend>
+      <legend class="label">Город</legend>
       <div class="cities-row" id="cities"></div>
       <svg class="skyline" viewBox="0 0 1200 120" preserveAspectRatio="xMidYMax meet" aria-hidden="true" focusable="false">
         <path data-city="Москва" pathLength="1" d="M0,112H40V100H70V92H96V112H130V80H134V66H137V56L145,30L153,56V66H156V80H160V112H190V94H196C196,86 204,84 206,74C208,84 216,86 216,94H222V86C222,76 232,73 235,60C238,73 248,76 248,86V94H262V112H300V98H340V104H380V112H440V90H470V76H490V62H500V48H506V36H510V24L512,8L514,24H518V36H524V48H534V62H554V76H584V90V112H640V100H680V112H820V64H842V40L848,34H862V52H872V20L880,12L888,20V60H900V30H916V44H930V70H944V50L958,46V80H980V112H1020V96H1060V104H1100V112H1200"/>
@@ -54,7 +54,7 @@
       <div class="inputs">
         <div class="field" id="f-budget">
           <div class="field-head">
-            <label class="caps" for="budget-num">Бюджет</label>
+            <label class="label" for="budget-num">Бюджет</label>
             <output class="big" id="budget-out" for="budget-num budget-range">25 <span class="u">млн ₽</span></output>
           </div>
           <input type="range" id="budget-range" min="0" max="300" step="1" value="140" aria-label="Бюджет, шкала" aria-describedby="budget-hint">
@@ -68,7 +68,7 @@
 
         <div class="field" id="f-area">
           <div class="field-head">
-            <label class="caps" for="area-num">Площадь</label>
+            <label class="label" for="area-num">Площадь</label>
             <output class="big" id="area-out" for="area-num area-range">40 <span class="u">м<span class="sq">2</span></span></output>
           </div>
           <input type="range" id="area-range" min="15" max="300" step="1" value="40" aria-label="Площадь, шкала" aria-describedby="area-hint">
@@ -98,7 +98,7 @@
 
     <section class="results" aria-labelledby="res-title">
       <div class="res-head">
-        <h2 id="res-title" class="caps">Подходящие ЖК</h2>
+        <h2 id="res-title" class="label">Подходящие ЖК</h2>
         <p class="res-sum" id="res-sum"></p>
       </div>
       <ol class="cards" id="cards"></ol>
