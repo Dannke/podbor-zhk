@@ -100,14 +100,23 @@ h1 > span, h1 em { display: block; }
 h1 em { font-style: italic; font-weight: 400; color: var(--ink-2); }
 .facade { justify-self: end; width: 100%; max-width: 440px; }
 .facade svg { display: block; width: 100%; height: auto; overflow: visible; }
-.facade figcaption { margin-top: 8px; text-align: right; }
+.facade figcaption { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin-top: 8px; }
 .fa-axis { stroke: var(--line-2); stroke-width: .6; stroke-dasharray: 10 3 2 3; }
 .fa-bub { fill: var(--paper); stroke: var(--ink-2); stroke-width: .8; }
 .fa-t { fill: var(--ink-2); font: 500 8.5px var(--text); letter-spacing: .04em; }
 .fa-wall { fill: var(--paper); stroke: var(--ink); stroke-width: 1.4; }
 .fa-thin { fill: none; stroke: var(--ink); stroke-width: .8; }
 .fa-floor, .fa-lev, .fa-hatch { stroke: var(--line-2); stroke-width: .6; }
-.fa-win { fill: none; stroke: var(--ink-2); stroke-width: .7; }
+.fa-win { fill: transparent; stroke: var(--ink-2); stroke-width: .7; transition: fill .2s, stroke .2s; }
+/* наведение: полоса этажа и его отметка уровня */
+.fa-hover { fill: var(--accent); opacity: 0; pointer-events: none; transition: opacity .2s, transform .15s var(--ease); }
+.fa-hmark { opacity: 0; pointer-events: none; transition: opacity .2s, transform .15s var(--ease); }
+.fa-hmark line { stroke: var(--accent); stroke-width: .8; }
+.fa-hmark path { fill: var(--accent); }
+.fa-hmark text { fill: var(--accent); font: 500 9px var(--text); paint-order: stroke; stroke: var(--paper); stroke-width: 4px; }
+.facade.hovering .fa-hover { opacity: .14; }
+.facade.hovering .fa-hmark { opacity: 1; }
+.facade.hovering svg { cursor: pointer; }
 .fa-win.on { fill: var(--accent); stroke: var(--accent); }
 .fa-unit { fill: none; stroke: var(--accent); stroke-width: 1.4; }
 .fa-ground { stroke: var(--ink); stroke-width: 1.4; }
@@ -342,7 +351,7 @@ details p { margin-top: 8px; }
   .lead { animation-delay: .24s; }
   .sheet::before, .sheet::after { animation: fade .4s linear .3s both; }
   .facade svg { animation: build .6s var(--ease) .15s both; } /* дом «вырастает» от земли */
-  .fa-unit, .fa-win.on, .fa-lead, .fa-dot, .fa-call { animation: fade .3s linear .75s both; }
+  .fa-unit, .fa-lead, .fa-dot, .fa-call { animation: fade .3s linear .75s both; }
 
   .js-motion [data-reveal] {
     opacity: 0; transform: translateY(18px);

@@ -190,7 +190,7 @@ function update(source) {
     $('live').textContent = errs.budget ? `Бюджет: ${errs.budget}` : `Площадь: ${errs.area}`;
     return;
   }
-  $('facade-area').textContent = num.format(state.area);
+  facadeArea(state.area);
   if (source !== 'budget-range') $('budget-range').value = toT(state.budget);
   if (source !== 'area-range') $('area-range').value = Math.round(state.area);
   if (source !== 'budget-num') $('budget-num').value = num.format(state.budget);
@@ -270,6 +270,71 @@ function themeToggle() {
 }
 themeToggle();
 
+/* ---------- фасад: квартира растёт с площадью, этаж выбирается кликом ---------- */
+const FA = { G: 360, L: 120, R: 330, WR: 390, LOBBY: 30, FL: 22, N: 12, BW: 35 };
+const fa = { f: 8, bays: 2, area: 40, shownF: 0, shownB: 2, ready: false };
+const floorTop = (f) => FA.G - FA.LOBBY - FA.FL * (f + 1); // f = 0 — первый типовой, то есть 2-й этаж
+const bayEnd = 5; // правый край квартиры — ось 6
+
+function drawUnit(fy, bays) {
+  fa.shownF = fy; fa.shownB = bays;
+  const x = FA.L + Math.max(0, bayEnd - bays) * FA.BW, w = bays * FA.BW, y = floorTop(fy);
+  const unit = document.querySelector('.fa-unit');
+  unit.setAttribute('x', x); unit.setAttribute('y', y); unit.setAttribute('width', w);
+  const ux = x + w, uy = y + FA.FL / 2;
+  document.querySelector('.fa-lead').setAttribute('d', `M${ux},${uy}L${FA.WR - 14},99H${FA.WR + 20}`);
+  const dot = document.querySelector('.fa-dot');
+  dot.setAttribute('cx', ux); dot.setAttribute('cy', uy);
+  // окна загораются на том этаже, мимо которого «едет» квартира
+  const f = Math.round(fy), b = Math.round(bays), s = Math.max(0, bayEnd - b);
+  fa.wins.forEach((win) => win.el.classList.toggle('on', win.f === f && win.b >= s && win.b < s + b));
+}
+
+function moveUnit() {
+  const f0 = fa.shownF, b0 = fa.shownB, f1 = fa.f, b1 = fa.bays;
+  document.querySelector('.fa-call').textContent = `Квартира ${num.format(fa.area)} м² · ${f1 + 2} этаж`;
+  tween('fa', 0, 1, 260 + 30 * Math.abs(f1 - f0), (k) => drawUnit(f0 + (f1 - f0) * k, b0 + (b1 - b0) * k));
+}
+
+function facadeArea(area) {
+  fa.area = area;
+  fa.bays = Math.min(6, Math.max(1, Math.ceil(area / 25))); // ponytail: ~25 м² на окно фасада — условно, для иллюстрации
+  if (fa.ready) moveUnit();
+}
+
+function facadeInit() {
+  const svg = $('facade-svg'), fig = svg.closest('.facade');
+  fa.wins = [...svg.querySelectorAll('.fa-win')].map((el) => ({
+    el, b: Math.round((+el.getAttribute('x') - FA.L - 7) / FA.BW),
+    f: Math.round((FA.G - FA.LOBBY - 5 - +el.getAttribute('y')) / FA.FL) - 1,
+  })).filter((w) => w.f >= 0 && w.b >= 0 && w.b < 6);
+  svg.insertAdjacentHTML('beforeend',
+    `<rect class="fa-hover" x="${FA.L}" y="0" width="${FA.R - FA.L}" height="${FA.FL}"/>` +
+    `<g class="fa-hmark"><line x1="54" y1="0" x2="${FA.L - 6}" y2="0"/><path d="M62,0l-5,-6h10z"/><text x="70" y="-4"></text></g>`);
+  const hover = svg.querySelector('.fa-hover'), mark = svg.querySelector('.fa-hmark');
+  const floorAt = (e) => {
+    const p = new DOMPoint(e.clientX, e.clientY).matrixTransform(svg.getScreenCTM().inverse());
+    const f = Math.floor((FA.G - FA.LOBBY - p.y) / FA.FL);
+    return p.x >= FA.L && p.x <= FA.R && f >= 0 && f < FA.N ? f : null;
+  };
+  svg.addEventListener('pointermove', (e) => {
+    const f = floorAt(e);
+    fig.classList.toggle('hovering', f !== null);
+    if (f === null) return;
+    hover.style.transform = `translateY(${floorTop(f)}px)`;
+    mark.style.transform = `translateY(${floorTop(f) + FA.FL}px)`;
+    mark.querySelector('text').textContent = `+${(4.5 + 3 * f).toFixed(3).replace('.', ',')} · ${f + 2} этаж`;
+  });
+  svg.addEventListener('pointerleave', () => fig.classList.remove('hovering'));
+  svg.addEventListener('click', (e) => {
+    const f = floorAt(e);
+    if (f !== null && f !== fa.f) { fa.f = f; moveUnit(); }
+  });
+  // при загрузке квартира «поднимается на лифте» на свой этаж, после того как дом вырос
+  drawUnit(0, fa.bays);
+  setTimeout(() => { fa.ready = true; moveUnit(); }, reduced.matches ? 0 : 750);
+}
+
 function init(data) {
   items = data.items;
   $('date').textContent = $('date2').textContent = data.date;
@@ -287,6 +352,7 @@ function init(data) {
   $('budget-num').addEventListener('input', (e) => { state.budget = parse(e.target.value); update('budget-num'); });
   $('area-num').addEventListener('input', (e) => { state.area = parse(e.target.value); update('area-num'); });
 
+  facadeInit();
   drawPlan(state.area);
   setCity(state.city);
   motion();
