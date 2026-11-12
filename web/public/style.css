@@ -350,8 +350,11 @@ details p { margin-top: 8px; }
   h1 em { animation-delay: .12s; }
   .lead { animation-delay: .24s; }
   .sheet::before, .sheet::after { animation: fade .4s linear .3s both; }
-  .facade svg { animation: build .6s var(--ease) .15s both; } /* дом «вырастает» от земли */
-  .fa-unit, .fa-lead, .fa-dot, .fa-call { animation: fade .3s linear .75s both; }
+  /* дом прорисовывается снизу вверх, как плоттером; окна «зажигаются» этаж за этажом (задержки — в разметке) */
+  .facade svg { animation: build 1.2s linear .15s both; }
+  .fa-win { animation: fa-lit .6s ease-out backwards; }
+  .fa-floor { animation: fade .4s ease-out backwards; }
+  .fa-unit, .fa-lead, .fa-dot, .fa-call { animation: fade .3s linear 1.35s both; }
 
   .js-motion [data-reveal] {
     opacity: 0; transform: translateY(18px);
@@ -373,7 +376,8 @@ details p { margin-top: 8px; }
   from { clip-path: circle(0 at var(--vt-x, 100%) var(--vt-y, 0)); }
   to { clip-path: circle(var(--vt-r, 150vmax) at var(--vt-x, 100%) var(--vt-y, 0)); }
 }
-@keyframes build { from { clip-path: inset(100% 0 0 0); } }
+@keyframes build { from { clip-path: inset(100% -24px -24px -24px); } to { clip-path: inset(-24px); } } /* оба конца inset(): к none не интерполируется */
+@keyframes fa-lit { 0% { opacity: 0; fill: var(--accent); } 35% { opacity: 1; fill: var(--accent); } }
 @keyframes lift { from { transform: translateY(.18em); } }
 @keyframes rise { from { opacity: 0; transform: translateY(.3em); } }
 

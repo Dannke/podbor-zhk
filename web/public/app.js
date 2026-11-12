@@ -330,9 +330,9 @@ function facadeInit() {
     const f = floorAt(e);
     if (f !== null && f !== fa.f) { fa.f = f; moveUnit(); }
   });
-  // при загрузке квартира «поднимается на лифте» на свой этаж, после того как дом вырос
+  // при загрузке квартира «поднимается на лифте» на свой этаж, когда дом дорисован (~1,35 с)
   drawUnit(0, fa.bays);
-  setTimeout(() => { fa.ready = true; moveUnit(); }, reduced.matches ? 0 : 750);
+  setTimeout(() => { fa.ready = true; moveUnit(); }, reduced.matches ? 0 : 1450);
 }
 
 function init(data) {
